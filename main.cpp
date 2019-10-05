@@ -35,6 +35,8 @@ struct Meniu{
 
 
 
+
+
 };
 struct Darbuotojas{
   string vardas;
@@ -59,10 +61,7 @@ struct Valgykla{
   }
   void atvaizduoti_meniu() {
     for (int i = 0; i < meniu.indeksas; i++) {
-      cout << i+1 <<". " << meniu.patiekalai[i].pavadinimas
-           << meniu.patiekalai[i].aprasymas
-           <<" kaina: " << meniu.patiekalai[i].kaina <<" eur" << endl;
-
+      cout << i+1 <<". " << "pavadinimas: "<< meniu.patiekalai[i].pavadinimas <<", aprasymas:"<< meniu.patiekalai[i].aprasymas<<", kaina: " << meniu.patiekalai[i].kaina <<" eur" << endl;
     }
   }
   void prideti_darbuotojus(Darbuotojas darb[], int n){ // masyvas 100
@@ -188,9 +187,109 @@ void algoritmas(){
 }
 
 
+Valgykla sukurtiValgiarasti(){
+
+  Valgykla valgykla;
+  Meniu valgiarastis;
+  Patiekalas patiekalas;
+
+  string pavadinimas;
+  string aprasymas;
+  int kaina;
+
+  cout << "Nurodyti patiekalo kaina: ";
+  cin >> kaina;
+  patiekalas.kaina = kaina;
+  cin.ignore(256, '\n');
+
+  cout << "Nurodyti patiekalo pav:";
+  getline(std::cin, pavadinimas);
+  patiekalas.pavadinimas = pavadinimas;
+
+  cout << "Nurodyti patiekalo aprasymas:";
+  getline(std::cin, aprasymas);
+  patiekalas.aprasymas = aprasymas;
+
+//  cout << "pavadinimas:" << patiekalas.pavadinimas << ", ";
+//  cout << "aprasymas: " << patiekalas.aprasymas<< ", ";
+//  cout << "kaina:" << patiekalas.kaina;
+
+  valgiarastis.ideti_patiekala(patiekalas);
+
+  valgykla.sukurti_meniu(valgiarastis);
+
+  return valgykla;
+}
+
+
+
+void meniu() {
+
+  int variantas = 0;
+
+  while (true) {
+    cout <<"\n";
+    cout << "=============================================\n";
+    cout << "1. Atvaizduoti meniu.\n";
+    cout << "2. Patiekalo aprašymas pagal meniu nr.\n";
+    cout << "3. Išeiti iš programos.\n";
+    cout << "=============================================\n";
+
+    cout << "Pasirinkite meniu punkta:";
+    cin >> variantas;
+
+    switch (variantas){
+      case 1:{
+        Valgykla valgykla = sukurtiValgiarasti();
+        valgykla.atvaizduoti_meniu();
+        break;
+      }
+      case 2:
+        cout << "Antras variantas";
+        break;
+      case 3:
+        cout << "Trecias variantas";
+        //exit(-1);
+        break;
+      default:
+        cout << "Toks meniu punktas neegzistuoja";
+        break;
+    }
+    if(variantas == 3){break;}
+
+
+  }
+}
+
+
 int main() {
 
-algoritmas();
+  meniu();
+
+
+
+
+
+
+
+
+
+//  int skaicius = 0;
+//
+//  int n = 0;
+//
+//  while(n < 4) {
+//      cout << "\n iveskite " << n + 1 << " skaiciu:";
+//      cin >> skaicius;
+//      if(skaicius == 0) {
+//        break;
+//      }else {
+//        cout << "\n Jusu ivestas skaicius: " << skaicius;
+//        n++;
+//      }
+//    }
+//
+  //algoritmas();
 
   return 0;
 }

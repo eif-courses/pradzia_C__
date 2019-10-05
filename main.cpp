@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdio>
 #include <utility>
+#include <limits>
 
 #define DARBUOTOJU_SKAICIUS 50
 using namespace std;
@@ -8,7 +9,7 @@ using namespace std;
 struct Patiekalas{
   string pavadinimas;
   string aprasymas;
-  int kaina;
+  int kaina{};
 
   Patiekalas sukurti_patiekala(int kain, string pav, string aprasymas){
     Patiekalas p;
@@ -61,7 +62,10 @@ struct Valgykla{
   }
   void atvaizduoti_meniu() {
     for (int i = 0; i < meniu.indeksas; i++) {
-      cout << i+1 <<". " << "pavadinimas: "<< meniu.patiekalai[i].pavadinimas <<", aprasymas:"<< meniu.patiekalai[i].aprasymas<<", kaina: " << meniu.patiekalai[i].kaina <<" eur" << endl;
+      cout << meniu.patiekalai[i].pavadinimas << meniu.patiekalai[i].aprasymas <<" "<< meniu.patiekalai[i].kaina<<endl;
+//      cout <<"kaina:" << meniu.patiekalai[i].kaina << endl;
+//      cout << "pavadinimas:"<< meniu.patiekalai[i].pavadinimas << endl;
+//      cout <<"aprasymas:" << meniu.patiekalai[i].aprasymas << endl;
     }
   }
   void prideti_darbuotojus(Darbuotojas darb[], int n){ // masyvas 100
@@ -200,7 +204,11 @@ Valgykla sukurtiValgiarasti(){
   cout << "Nurodyti patiekalo kaina: ";
   cin >> kaina;
   patiekalas.kaina = kaina;
-  cin.ignore(256, '\n');
+
+  // Useriui ivedus kaina spaudziamas mygtukas enter
+  // ir jeigu yra naudojama getline() funkcija ji nuskaito nauja eilute
+  // todel privaloma ignoruoti sia eilute naudojant funkciją cin.ignore()....
+  cin.ignore(numeric_limits<streamsize>::max(),'\n');
 
   cout << "Nurodyti patiekalo pav:";
   getline(std::cin, pavadinimas);

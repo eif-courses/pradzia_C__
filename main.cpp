@@ -62,10 +62,10 @@ struct Valgykla{
   }
   void atvaizduoti_meniu() {
     for (int i = 0; i < meniu.indeksas; i++) {
-      cout << meniu.patiekalai[i].pavadinimas << meniu.patiekalai[i].aprasymas <<" "<< meniu.patiekalai[i].kaina<<endl;
-//      cout <<"kaina:" << meniu.patiekalai[i].kaina << endl;
-//      cout << "pavadinimas:"<< meniu.patiekalai[i].pavadinimas << endl;
-//      cout <<"aprasymas:" << meniu.patiekalai[i].aprasymas << endl;
+
+      string temp = to_string(i+1)+"."+meniu.patiekalai[i].pavadinimas +", "+ meniu.patiekalai[i].aprasymas+", "+to_string(meniu.patiekalai[i].kaina);
+      cout << temp;
+
     }
   }
   void prideti_darbuotojus(Darbuotojas darb[], int n){ // masyvas 100
@@ -201,7 +201,7 @@ Valgykla sukurtiValgiarasti(){
   string aprasymas;
   int kaina;
 
-  cout << "Nurodyti patiekalo kaina: ";
+  cout << "Nurodyti patiekalo kaina:"<<endl;
   cin >> kaina;
   patiekalas.kaina = kaina;
 
@@ -210,11 +210,11 @@ Valgykla sukurtiValgiarasti(){
   // todel privaloma ignoruoti sia eilute naudojant funkciją cin.ignore()....
   cin.ignore(numeric_limits<streamsize>::max(),'\n');
 
-  cout << "Nurodyti patiekalo pav:";
+  cout << "Nurodyti patiekalo pav:"<<endl;
   getline(std::cin, pavadinimas);
   patiekalas.pavadinimas = pavadinimas;
 
-  cout << "Nurodyti patiekalo aprasymas:";
+  cout << "Nurodyti patiekalo aprasymas:"<<endl;
   getline(std::cin, aprasymas);
   patiekalas.aprasymas = aprasymas;
 
